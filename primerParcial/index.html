@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Primer Parcial Labo</title>
+    <link rel="stylesheet" href="style.css" />
+    <title>Primer Parcila Labo Tres</title>
 </head>
 <body>
-    
-    <div class="form-datos">
+    <div style="display: block;" id="form-datos">
         <h1>Form Datos</h1>
         <label>Filtrar por:</label>
         <select id="filtro">
@@ -63,7 +62,7 @@
     </div>
 
     <br><br>
-    <div class="form-abm" hidden>
+    <div style="display: none;" id="form-abm">
         <h2>Formulario ABM</h2>
         <label for="id">Id:</label>
         <input type="text" id="id" disabled="true" /><br>
@@ -89,7 +88,10 @@
         <input type="number" id="cantrue" /><br>
         <button id="aceptar">Aceptar</button>
         <button id="cancelar">Cancelar</button>
+        <button id="eliminar">Eliminar</button>
+        <button id="insertar">Insertar</button>
       </div>
-    <script type="module" src="js/script.js"></script>
+
+    <script type="module" src="./js/script.js"></script>
 </body>
 </html>
