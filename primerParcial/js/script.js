@@ -15,15 +15,15 @@ const formAbm = document.getElementById('form-abm');
 
 
 //text box del form abm
-const txtid = document.getElementById('id');
-const txtModelo = document.getElementById('modelo');
-const txtanofab = document.getElementById('anofab');
-const txtvelmax = document.getElementById('velmax');
-const dropDownTipo = document.getElementById('tipo');
-const txtaltmax = document.getElementById('altmax');
-const txtautonomia = document.getElementById('autonomia');
-const txtcantpue = document.getElementById('cantpue');
-const txtcantrue = document.getElementById('cantrue');
+let txtid = document.getElementById('id');
+let txtModelo = document.getElementById('modelo');
+let txtanofab = document.getElementById('anofab');
+let txtvelmax = document.getElementById('velmax');
+let dropDownTipo = document.getElementById('tipo');
+let txtaltmax = document.getElementById('altmax');
+let txtautonomia = document.getElementById('autonomia');
+let txtcantpue = document.getElementById('cantpue');
+let txtcantrue = document.getElementById('cantrue');
 
 
 
@@ -38,13 +38,14 @@ const btnInsertar = document.getElementById('insertar');
 const chkId = document.getElementById('col-id');
 const chkmodelo = document.getElementById('col-modelo');
 const chkanoFab = document.getElementById('col-anoFab');
-const chkVelMax= document.getElementById('col-velMax');
+const chkVelMax = document.getElementById('col-velMax');
 const chkAltMax = document.getElementById('col-altMax');
 const chkAutonomia = document.getElementById('col-autonomia');
 const chkCantPue = document.getElementById('col-cantPue');
 const chkCantRue = document.getElementById('col-cantRue');
 
 //headers
+const columnHeaders = document.querySelectorAll('#tabla-datos th');
 const cabeceraId = document.getElementById('id-header');
 const cabeceraModelo = document.getElementById('modelo-header');
 const cabeceraAnoFab = document.getElementById('anoFab-header');
@@ -54,8 +55,7 @@ const cabeceraAutonomia = document.getElementById('autonomia-header');
 const cabeceraCantPue = document.getElementById('cantpue-header');
 const cabeceraCantRue = document.getElementById('cantrue-header');
 
-
-
+let flag = false;
 
 
 //llenar tabla y mostrar los datos punto a)
@@ -166,7 +166,7 @@ function switchForms() {
 tablaDatos.addEventListener("dblclick", function (event) {
     const targetRow = event.target.closest("tr");
 
-    if (targetRow) {
+    if (!targetRow.classList.contains("header-row")) {
         // Get the data from the triggered row
         const cells = targetRow.getElementsByTagName("td");
         const rowData = [];
@@ -181,7 +181,6 @@ tablaDatos.addEventListener("dblclick", function (event) {
         cargarTextBox(jsonData);
     }
 });
-
 
 function cargarTextBox(data) {
 
@@ -238,46 +237,14 @@ btnAceptar.addEventListener("click", () => {
     llenarTabla(VehiculosData);
 });
 
-btnEliminar.addEventListener("click",() => {
+btnEliminar.addEventListener("click", () => {
     eliminar();
     limpiarTabla();
     llenarTabla(VehiculosData);
 });
 
-// function modificar(){
-//     let id = txtid.value;
-//     let modelo = txtModelo.value;
-//     let altMax = txtaltmax.value;
-//     let anoFab = txtanofab.value;
-//     let velMax = txtvelmax.value;
-//     let autonomia = txtautonomia.value;
-//     let cantPue = txtcantpue.value;
-//     let cantRue = txtcantrue.value;
 
-
-//     let objeto = buscarIdLista(id);
-//     if (objeto != null) {
-//         for (let i = 0; i < VehiculosData.length; i++) {
-//             if (VehiculosData[i].id == id) {
-//                 // Modify the object's properties with new data
-//                 VehiculosData[i].id = id;
-//                 VehiculosData[i].modelo = modelo;
-//                 VehiculosData[i].altMax = altMax;
-//                 VehiculosData[i].anoFab = anoFab;
-//                 VehiculosData[i].velMax = velMax;
-//                 VehiculosData[i].autonomia = autonomia;
-//                 VehiculosData[i].cantPue = cantPue;
-//                 VehiculosData[i].cantRue = cantRue;
-//                 break; // Exit the loop once the object is modified
-//             }
-//         }
-//     }
-
-//     console.log(VehiculosData);
-// }
-
-
-function modificar(){
+function modificar() {
     let id = txtid.value;
     let modelo = txtModelo.value;
     let altMax = txtaltmax.value;
@@ -294,13 +261,13 @@ function modificar(){
             if (VehiculosData[i].id == id) {
                 // Modify the object's properties with new data
                 if (tieneAltMaxOrAutonomia(VehiculosData[i]) == true) {
-                    let nuevoAereo = new Aereo(id,modelo,anoFab,velMax,altMax,autonomia);
-                    VehiculosData.splice(i,1,nuevoAereo);
+                    let nuevoAereo = new Aereo(id, modelo, anoFab, velMax, altMax, autonomia);
+                    VehiculosData.splice(i, 1, nuevoAereo);
                 }
 
                 if (tieneCantPueOrCantRue(VehiculosData[i]) == true) {
-                    let nuevoTerrestre = new Terrestres(id,modelo,anoFab,velMax,cantPue,cantRue);
-                    VehiculosData.splice(i,1,nuevoTerrestre);
+                    let nuevoTerrestre = new Terrestres(id, modelo, anoFab, velMax, cantPue, cantRue);
+                    VehiculosData.splice(i, 1, nuevoTerrestre);
                 }
                 break;
             }
@@ -309,7 +276,7 @@ function modificar(){
 }
 
 
-function buscarIdLista(id){
+function buscarIdLista(id) {
     for (let i = 0; i < VehiculosData.length; i++) {
         if (VehiculosData[i].id == id) {
             return VehiculosData[i]; // Return the object if found
@@ -319,62 +286,62 @@ function buscarIdLista(id){
 }
 
 
-function eliminar(){
+function eliminar() {
     let id = txtid.value;
     for (let i = 0; i < VehiculosData.length; i++) {
         if (VehiculosData[i].id == id) {
-            VehiculosData.splice(i,1);
-        } 
+            VehiculosData.splice(i, 1);
+        }
     }
 }
 
 
 //punto h)
 chkId.addEventListener("change", () => {
-    const ocultar = !chkId.checked; 
+    const ocultar = !chkId.checked;
     cabeceraId.hidden = ocultar;
     ocultarMostrarColumna("Id", ocultar);
 });
 
 chkmodelo.addEventListener("change", () => {
-    const ocultar = !chkmodelo.checked; 
+    const ocultar = !chkmodelo.checked;
     cabeceraModelo.hidden = ocultar;
     ocultarMostrarColumna("Modelo", ocultar);
 });
 
 chkanoFab.addEventListener("change", () => {
-    const ocultar = !chkanoFab.checked; 
+    const ocultar = !chkanoFab.checked;
     cabeceraAnoFab.hidden = ocultar;
     ocultarMostrarColumna("Año fab", ocultar);
 });
 
 chkVelMax.addEventListener("change", () => {
-    const ocultar = !chkVelMax.checked; 
+    const ocultar = !chkVelMax.checked;
     cabeceraVelMax.hidden = ocultar;
     ocultarMostrarColumna("vel max", ocultar);
 });
 
 chkAltMax.addEventListener("change", () => {
-    const ocultar = !chkAltMax.checked; 
+    const ocultar = !chkAltMax.checked;
     cabeceraAltMax.hidden = ocultar;
     ocultarMostrarColumna("alt max", ocultar);
 });
 
 
 chkAutonomia.addEventListener("change", () => {
-    const ocultar = !chkAutonomia.checked; 
+    const ocultar = !chkAutonomia.checked;
     cabeceraAutonomia.hidden = ocultar;
     ocultarMostrarColumna("autonomia", ocultar);
 });
 
 chkCantPue.addEventListener("change", () => {
-    const ocultar = !chkCantPue.checked; 
+    const ocultar = !chkCantPue.checked;
     cabeceraCantPue.hidden = ocultar;
     ocultarMostrarColumna("cant pue", ocultar);
 });
 
 chkCantRue.addEventListener("change", () => {
-    const ocultar = !chkCantRue.checked; 
+    const ocultar = !chkCantRue.checked;
     cabeceraCantRue.hidden = ocultar;
     ocultarMostrarColumna("cant rue", ocultar);
 });
@@ -383,33 +350,33 @@ chkCantRue.addEventListener("change", () => {
 function ocultarMostrarColumna(nombreColumna, ocultar) {
     const filas = tablaDatos.querySelectorAll('tbody tr');
     filas.forEach((fila) => {
-      const celda = fila.querySelector(`td:nth-child(${getColumnIndex(nombreColumna)})`);
-      if (celda) {
-        celda.style.display = ocultar ? 'none' : '';
-      }
+        const celda = fila.querySelector(`td:nth-child(${getColumnIndex(nombreColumna)})`);
+        if (celda) {
+            celda.style.display = ocultar ? 'none' : '';
+        }
     });
-  }
+}
 
 
-  function getColumnIndex(nombreColumna) {
+function getColumnIndex(nombreColumna) {
     const thList = document.querySelectorAll('th');
     for (let i = 0; i < thList.length; i++) {
-      if (thList[i].textContent === nombreColumna) {
-        return i + 1;
-      }
+        if (thList[i].textContent === nombreColumna) {
+            return i + 1;
+        }
     }
     return -1;
-  }
+}
 
 
-btnAgregar.addEventListener("click",() => {
+btnAgregar.addEventListener("click", () => {
     switchForms();
-    agregar();
+    limpiarFormAbm();
+    txtid.value = devolverIdMaximo();
 });
 
 
 function agregar() {
-    txtid.value = devolverIdMaximo();
     let id = txtid.value;
     let modelo = txtModelo.value;
     let altMax = txtaltmax.value;
@@ -418,16 +385,15 @@ function agregar() {
     let autonomia = txtautonomia.value;
     let cantPue = txtcantpue.value;
     let cantRue = txtcantrue.value;
-
     let tipo = dropDownTipo.value;
 
     if (tipo === "Aereo") {
-        let nuevoAereo = new Aereo(id,modelo,anoFab,velMax,altMax,autonomia);
+        let nuevoAereo = new Aereo(id, modelo, anoFab, velMax, altMax, autonomia);
         VehiculosData.push(nuevoAereo);
     }
 
     if (tipo == "Terrestre") {
-        let nuevoTerrestre = new Terrestres(id,modelo,anoFab,velMax,cantPue,cantRue);
+        let nuevoTerrestre = new Terrestres(id, modelo, anoFab, velMax, cantPue, cantRue);
         VehiculosData.push(nuevoTerrestre);
     }
 }
@@ -463,3 +429,138 @@ function devolverIdMaximo() {
 
     return idMaximo;
 }
+
+
+function limpiarFormAbm() {
+    txtid.value = "";
+    txtModelo.value = "";
+    txtanofab.value = "";
+    txtvelmax.value = "";
+    txtaltmax.value = "";
+    txtautonomia.value = "";
+    txtcantpue.value = "";
+    txtcantrue.value = "";
+}
+
+
+//punto g)
+columnHeaders.forEach((header) => {
+    header.addEventListener("click", (event) => {
+        const columnaNombreId = event.target.id;
+
+        switch (columnaNombreId) {
+            case 'id-header':
+                if (flag === false) {
+                    let VehiculosDataOrdenado = VehiculosData.sort((a, b) => b.id - a.id);
+                    limpiarTabla();
+                    llenarTabla(VehiculosDataOrdenado);
+                    flag = true;
+                }
+                else {
+                    let VehiculosDataOrdenado = VehiculosData.sort((a, b) => a.id - b.id);
+                    limpiarTabla();
+                    llenarTabla(VehiculosDataOrdenado);
+                    flag = false;
+                }
+                break;
+            case 'modelo-header':
+                if (flag === false) {
+                    let VehiculosDataOrdenado = VehiculosData.sort((a, b) => a.modelo.localeCompare(b.modelo));
+                    limpiarTabla();
+                    llenarTabla(VehiculosDataOrdenado);
+                    flag = true;
+                }
+                else {
+                    let VehiculosDataOrdenado = VehiculosData.sort((a, b) => b.modelo.localeCompare(a.modelo));
+                    limpiarTabla();
+                    llenarTabla(VehiculosDataOrdenado);
+                    flag = false;
+                }
+                break;
+            case 'anoFab-header':
+                if (flag === false) {
+                    let VehiculosDataOrdenado = VehiculosData.sort((a, b) => b.anoFab - a.anoFab);
+                    limpiarTabla();
+                    llenarTabla(VehiculosDataOrdenado);
+                    flag = true;
+                }
+                else {
+                    let VehiculosDataOrdenado = VehiculosData.sort((a, b) => a.anoFab - b.anoFab);
+                    limpiarTabla();
+                    llenarTabla(VehiculosDataOrdenado);
+                    flag = false;
+                }
+                break;
+            case 'velMax-header':
+                if (flag === false) {
+                    let VehiculosDataOrdenado = VehiculosData.sort((a, b) => b.velMax - a.velMax);
+                    limpiarTabla();
+                    llenarTabla(VehiculosDataOrdenado);
+                    flag = true;
+                }
+                else {
+                    let VehiculosDataOrdenado = VehiculosData.sort((a, b) => a.velMax - b.velMax);
+                    limpiarTabla();
+                    llenarTabla(VehiculosDataOrdenado);
+                    flag = false;
+                }
+                break;
+            case 'altMAx-header':
+                if (flag === false) {
+                    let VehiculosDataOrdenado = VehiculosData.sort((a, b) => b.altMax - a.altMax);
+                    limpiarTabla();
+                    llenarTabla(VehiculosDataOrdenado);
+                    flag = true;
+                }
+                else {
+                    let VehiculosDataOrdenado = VehiculosData.sort((a, b) => a.altMax - b.altMax);
+                    limpiarTabla();
+                    llenarTabla(VehiculosDataOrdenado);
+                    flag = false;
+                }
+                break;
+            case 'autonomia-header':
+                if (flag === false) {
+                    let VehiculosDataOrdenado = VehiculosData.sort((a, b) => b.autonomia - a.autonomia);
+                    limpiarTabla();
+                    llenarTabla(VehiculosDataOrdenado);
+                    flag = true;
+                }
+                else {
+                    let VehiculosDataOrdenado = VehiculosData.sort((a, b) => a.autonomia - b.autonomia);
+                    limpiarTabla();
+                    llenarTabla(VehiculosDataOrdenado);
+                    flag = false;
+                }
+                break;
+            case 'cantpue-header':
+                if (flag === false) {
+                    let VehiculosDataOrdenado = VehiculosData.sort((a, b) => b.cantPue - a.cantPue);
+                    limpiarTabla();
+                    llenarTabla(VehiculosDataOrdenado);
+                    flag = true;
+                }
+                else {
+                    let VehiculosDataOrdenado = VehiculosData.sort((a, b) => a.cantPue - b.cantPue);
+                    limpiarTabla();
+                    llenarTabla(VehiculosDataOrdenado);
+                    flag = false;
+                }
+                break;
+            case 'cantrue-header':
+                if (flag === false) {
+                    let VehiculosDataOrdenado = VehiculosData.sort((a, b) => b.cantRue - a.cantRue);
+                    limpiarTabla();
+                    llenarTabla(VehiculosDataOrdenado);
+                    flag = true;
+                }
+                else {
+                    let VehiculosDataOrdenado = VehiculosData.sort((a, b) => a.cantRue - b.cantRue);
+                    limpiarTabla();
+                    llenarTabla(VehiculosDataOrdenado);
+                    flag = false;
+                }
+                break;
+        }
+    });
+});
