@@ -164,6 +164,7 @@ function switchForms() {
 
 
 tablaDatos.addEventListener("dblclick", function (event) {
+    desabilitarBotonInsertar();
     const targetRow = event.target.closest("tr");
 
     if (!targetRow.classList.contains("header-row")) {
@@ -191,10 +192,11 @@ function cargarTextBox(data) {
         txtvelmax.value = data["velMax"];
         txtaltmax.value = data["altMax"];
         txtautonomia.value = data["autonomia"];
+        //Desbilito el drop down
         dropDownTipo.value = "Aereo";
         dropDownTipo.disabled = true;
-        txtcantpue.disabled = true;
-        txtcantrue.disabled = true;
+        desabilitarCamposNoAereo();
+        habilitarCamposAereo();
     }
     if (tieneCantPueOrCantRue(data) === true) {
         txtid.value = data["id"];
@@ -203,10 +205,11 @@ function cargarTextBox(data) {
         txtvelmax.value = data["velMax"];
         txtcantpue.value = data["cantPue"];
         txtcantrue.value = data["cantRue"];
+        //Desbilito el drop down
         dropDownTipo.value = "Terrestre";
         dropDownTipo.disabled = true;
-        txtaltmax.disabled = true;
-        txtautonomia.disabled = true;
+        desabilitarCamposNoTerrestre();
+        habilitarCamposTerrestre();
     }
 }
 
@@ -229,6 +232,7 @@ function convertToJSON(rowData) {
 
 btnCancelar.addEventListener("click", () => {
     switchForms();
+    mostrarBotonesFormAbm();
 });
 
 btnAceptar.addEventListener("click", () => {
@@ -263,11 +267,13 @@ function modificar() {
                 if (tieneAltMaxOrAutonomia(VehiculosData[i]) == true) {
                     let nuevoAereo = new Aereo(id, modelo, anoFab, velMax, altMax, autonomia);
                     VehiculosData.splice(i, 1, nuevoAereo);
+                    alert("El Aereo ha sido modificado");
                 }
 
                 if (tieneCantPueOrCantRue(VehiculosData[i]) == true) {
                     let nuevoTerrestre = new Terrestres(id, modelo, anoFab, velMax, cantPue, cantRue);
                     VehiculosData.splice(i, 1, nuevoTerrestre);
+                    alert("El Terrestre ha sido modificado");
                 }
                 break;
             }
@@ -291,6 +297,7 @@ function eliminar() {
     for (let i = 0; i < VehiculosData.length; i++) {
         if (VehiculosData[i].id == id) {
             VehiculosData.splice(i, 1);
+            alert("El vehiculo ha sido Eliminado");
         }
     }
 }
@@ -368,13 +375,92 @@ function getColumnIndex(nombreColumna) {
     return -1;
 }
 
+//agregar bton Punto d)
 
 btnAgregar.addEventListener("click", () => {
     switchForms();
     limpiarFormAbm();
-    txtid.value = devolverIdMaximo();
+    txtid.value = parseInt(devolverIdMaximo())  + 1;
+    esconderBotonesFormAbm();
+    habilitarTodosCamposFormAbm();
+    habilitarBotonInsertar();
 });
 
+function esconderBotonesFormAbm() {
+    btnAceptar.style.visibility = 'hidden';
+    btnAceptar.disabled = true;
+    btnEliminar.style.visibility = 'hidden';
+    btnEliminar.disabled = true;
+}
+
+function mostrarBotonesFormAbm() {
+    btnAceptar.style.visibility = 'visible';
+    btnAceptar.disabled = false;
+    btnEliminar.style.visibility = 'visible';
+    btnEliminar.disabled = false;
+}
+
+function habilitarTodosCamposFormAbm() {
+    //el id el unico campo desabilitado
+    txtid.disabled = true;
+    txtModelo.disabled = false
+    txtanofab.disabled = false; 
+    txtvelmax.disabled = false; 
+    dropDownTipo.disabled = false; 
+    txtaltmax.disabled = false; 
+    txtautonomia.disabled = false; 
+    txtcantpue.disabled = false;
+    txtcantrue.disabled = false; 
+    dropDownTipo.disabled = false;
+}
+
+
+function desabilitarCamposNoTerrestre() {
+    txtaltmax.disabled = true;
+    txtautonomia.disabled = true;
+}
+
+function habilitarCamposAereo() {
+    txtaltmax.disabled = false;
+    txtautonomia.disabled = false;
+}
+
+function desabilitarCamposNoAereo() {
+    txtcantpue.disabled = true;
+    txtcantrue.disabled = true;
+}
+
+function habilitarCamposTerrestre() {
+    txtcantpue.disabled = false;
+    txtcantrue.disabled = false;
+}
+
+function desabilitarBotonInsertar() {
+    btnInsertar.style.visibility = 'hidden';
+    btnInsertar.disabled = true;
+}
+
+function habilitarBotonInsertar() {
+    btnInsertar.style.visibility = 'visible';
+    btnInsertar.disabled = false;
+}
+
+dropDownTipo.addEventListener("change", () => {
+    let valorSeleccionadoDropDown = dropDownTipo.value;
+
+    switch (valorSeleccionadoDropDown) {
+        case 'Aereo':
+            desabilitarCamposNoAereo();
+            habilitarCamposAereo();
+            break;
+        case 'Terrestre':
+            desabilitarCamposNoTerrestre();
+            habilitarCamposTerrestre();
+            break;
+    }
+    //vacio los txt por si se ingresaron datos en los txt que inabilito
+    limpiarFormAbmMenosId();
+});
 
 function agregar() {
     let id = txtid.value;
@@ -388,19 +474,33 @@ function agregar() {
     let tipo = dropDownTipo.value;
 
     if (tipo === "Aereo") {
-        let nuevoAereo = new Aereo(id, modelo, anoFab, velMax, altMax, autonomia);
-        VehiculosData.push(nuevoAereo);
+        if (txtModelo.value === "" || txtanofab.value === "" || txtvelmax.value === "" || txtaltmax.value === "" || txtautonomia.value === "") {
+            alert("Falto completar alguno de los campos");          
+        } else 
+        {
+            let nuevoAereo = new Aereo(id, modelo, anoFab, velMax, altMax, autonomia);
+            VehiculosData.push(nuevoAereo);
+            alert("Se agrego exitosamente el nuevo Aereo");
+        }
+
     }
 
     if (tipo == "Terrestre") {
-        let nuevoTerrestre = new Terrestres(id, modelo, anoFab, velMax, cantPue, cantRue);
-        VehiculosData.push(nuevoTerrestre);
+        if (txtModelo.value === "" || txtanofab.value === "" || txtvelmax.value === "" || txtcantpue.value === "" || txtcantrue.value === ""){
+            alert("Falto completar alguno de los campos");
+        } else {
+            let nuevoTerrestre = new Terrestres(id, modelo, anoFab, velMax, cantPue, cantRue);
+            VehiculosData.push(nuevoTerrestre);
+            alert("Se agrego exitosamente el nuevo Terrestre");
+        }
     }
 }
 
 
 btnInsertar.addEventListener("click", () => {
     agregar();
+    limpiarTabla();
+    llenarTabla(VehiculosData);
 });
 
 
@@ -442,6 +542,15 @@ function limpiarFormAbm() {
     txtcantrue.value = "";
 }
 
+function limpiarFormAbmMenosId() {
+    txtModelo.value = "";
+    txtanofab.value = "";
+    txtvelmax.value = "";
+    txtaltmax.value = "";
+    txtautonomia.value = "";
+    txtcantpue.value = "";
+    txtcantrue.value = "";
+}
 
 //punto g)
 columnHeaders.forEach((header) => {
