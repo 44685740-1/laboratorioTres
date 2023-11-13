@@ -28,7 +28,7 @@ let txtcantrue = document.getElementById('cantrue');
 
 
 //botones abm
-const btnAceptar = document.getElementById('aceptar');
+const btnModificar = document.getElementById('modificar');
 const btnCancelar = document.getElementById('cancelar');
 const btnEliminar = document.getElementById('eliminar');
 const btnAgregar = document.getElementById('boton-agregar');
@@ -235,7 +235,7 @@ btnCancelar.addEventListener("click", () => {
     mostrarBotonesFormAbm();
 });
 
-btnAceptar.addEventListener("click", () => {
+btnModificar.addEventListener("click", () => {
     modificar();
     limpiarTabla();
     llenarTabla(VehiculosData);
@@ -387,15 +387,15 @@ btnAgregar.addEventListener("click", () => {
 });
 
 function esconderBotonesFormAbm() {
-    btnAceptar.style.visibility = 'hidden';
-    btnAceptar.disabled = true;
+    btnModificar.style.visibility = 'hidden';
+    btnModificar.disabled = true;
     btnEliminar.style.visibility = 'hidden';
     btnEliminar.disabled = true;
 }
 
 function mostrarBotonesFormAbm() {
-    btnAceptar.style.visibility = 'visible';
-    btnAceptar.disabled = false;
+    btnModificar.style.visibility = 'visible';
+    btnModificar.disabled = false;
     btnEliminar.style.visibility = 'visible';
     btnEliminar.disabled = false;
 }

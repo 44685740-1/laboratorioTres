@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <title>Segundo Parcil Labo |||</title>
+</head>
+
+<body>
+    <div class="frm-lista">
+        <h1>Formulario Lista</h1>
+        <table id="tabla-datos">
+            <thead>
+                <tr class="header-row">
+                    <th id="id-header">Id</th>
+                    <th id="nombre-header">Nombre</th>
+                    <th id="apellido-header">Apellido</th>
+                    <th id="edad-header">Edad</th>
+                    <th id="Sueldo-header">Sueldo</th>
+                    <th id="Ventas-header">Ventas</th>
+                    <th id="Compras-header">Compras</th>
+                    <th id="Telefono-header">Telefono</th>
+                    <th id="Modificar-header">Modificar</th>
+                    <th id="Eliminar-header">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-datos"></tbody>
+        </table>
+        <br>
+        <button class="agregar-elemento">Agregar Elemento</button>
+    </div>
+
+    <div class="frm-abm">
+        <h2>Formulario ABM</h2>
+        <label for="id">Id:</label>
+        <input type="text" id="id" disabled="true" /><br>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="modelo" /><br>
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" /><br>
+        <label for="edad">Edad:</label>
+        <input type="text" id="edad" /><br>
+        <label for="tipo">Tipo</label>
+        <select id="tipo">
+            <option>Empleado</option>
+            <option>Cliente</option>
+        </select>
+        <br>
+        <label for="sueldo">Sueldo:</label>
+        <input type="text" id="sueldo" /><br>
+        <label for="ventas">Ventas:</label>
+        <input type="text" id="ventas" /><br>
+        <label for="compras">Compras:</label>
+        <input type="text" id="compras" /><br>
+        <label for="telefono">Telefono:</label>
+        <input type="text" id="telefono" /><br>
+        <button id="cancelar">Cancelar</button>
+        <button id="aceptar">Aceptar</button>
+        <button id="eliminar">Eliminar</button>
+        <button id="insertar">Insertar</button>
+    </div>
+    <script type="module" src="js/ajax.js"></script>
+    <script type="module" src="js/script.js"></script>
+</body>
+
+</html>
