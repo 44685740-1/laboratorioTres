@@ -9,7 +9,11 @@
 </head>
 
 <body>
-    <div class="frm-lista">
+    <div class="overlay" id="overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <div id="frm-lista">
         <h1>Formulario Lista</h1>
         <table id="tabla-datos">
             <thead>
@@ -29,15 +33,15 @@
             <tbody id="tabla-datos"></tbody>
         </table>
         <br>
-        <button class="agregar-elemento">Agregar Elemento</button>
+        <button id="agregar-elemento">Agregar Elemento</button>
     </div>
 
-    <div class="frm-abm">
+    <div style="display: none;" id="frm-abm">
         <h2>Formulario ABM</h2>
         <label for="id">Id:</label>
         <input type="text" id="id" disabled="true" /><br>
         <label for="nombre">Nombre:</label>
-        <input type="text" id="modelo" /><br>
+        <input type="text" id="nombre" /><br>
         <label for="apellido">Apellido:</label>
         <input type="text" id="apellido" /><br>
         <label for="edad">Edad:</label>
@@ -58,11 +62,13 @@
         <input type="text" id="telefono" /><br>
         <button id="cancelar">Cancelar</button>
         <button id="aceptar">Aceptar</button>
+        <button id="modificar">Modificar</button>
         <button id="eliminar">Eliminar</button>
-        <button id="insertar">Insertar</button>
     </div>
-    <script type="module" src="js/ajax.js"></script>
-    <script type="module" src="js/script.js"></script>
+
+
+    <script type="module" src="js/ajax.mjs"></script>
+    <script type="module" src="js/script.mjs"></script>
 </body>
 
 </html>

@@ -70,3 +70,39 @@ input[type="checkbox"] {
     vertical-align: middle; /* Align the checkbox vertically with the label */
     cursor: pointer; /* Show a pointer cursor when hovering */
 }
+
+
+/*
+Estilos del Spinner
+*/
+
+body {
+    margin: 0;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.8); /* Adjust the alpha value for transparency */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999; /* Ensure the overlay is on top of other elements */
+}
+
+.spinner {
+    border: 8px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 8px solid red;
+    width: 50px; /* Adjust the width of the spinner */
+    height: 50px; /* Adjust the height of the spinner */
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
