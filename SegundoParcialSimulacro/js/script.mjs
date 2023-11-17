@@ -30,6 +30,9 @@ const btnEliminar = document.getElementById('eliminar');
 //spinner and overlay
 const spinner = document.getElementsByClassName('overlay');
 
+//titulo con la accion del ABM
+const tituloAccion = document.getElementById('accion-frm');
+
 
 let listaUsuarios;        
 getUsersApi((error, data) => {
@@ -96,6 +99,9 @@ btnCancelar.addEventListener("click", () => {
 
 btnAgregarElemento.addEventListener("click", () => {
     limpiarFormAbm();
+    ocultarBtnEliminarModificar();
+    MostrarBtnAceptar();
+    tituloAccion.innerText = "Agregar Usuario";
     switchForms();
 });
 
@@ -169,6 +175,50 @@ function limpiarFormAbm() {
     txtCompras.value = "";
     txtTelefono.value = "";
     txtSueldo.value = "";
+}
+
+function ocultarBtnEliminarModificar() {
+    btnEliminar.style.visibility = 'hidden';
+    btnModificar.style.visibility = 'hidden';
+    btnEliminar.disabled = true;
+    btnModificar.disabled = true;
+}
+
+function mostrarBtnEliminarModificar() {
+    btnEliminar.style.visibility = 'visible';
+    btnModificar.style.visibility = 'visible';
+    btnEliminar.disabled = false;
+    btnModificar.disabled = false;
+}
+
+function mostrarBtnEliminar() {
+    btnEliminar.style.visibility = 'visible';
+    btnEliminar.disabled = false;
+}
+
+function mostrarBtnModificar() {
+    btnModificar.style.visibility = 'visible';
+    btnModificar.disabled = false;
+}
+
+function ocultarBtnEliminar() {
+    btnEliminar.style.visibility = 'hidden';
+    btnEliminar.disabled = true;
+}
+
+function ocultarBtnModificar() {
+    btnModificar.style.visibility = 'hidden';
+    btnModificar.disabled = true;
+}
+
+function ocultarBtnAceptar() {
+    btnAceptar.style.visibility = 'hidden';
+    btnAceptar.disabled = true;
+}
+
+function MostrarBtnAceptar() {
+    btnAceptar.style.visibility = 'visible';
+    btnAceptar.disabled = false;
 }
 
 dropDownTipo.addEventListener("change", () => {
@@ -256,7 +306,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 };
                 cargarTxtFrmAbm(nuevoCliente);
             }
-
+            mostrarBtnModificar();
+            ocultarBtnEliminar();
+            ocultarBtnAceptar();
+            tituloAccion.innerText = "Modificar Usuario";
             switchForms();
         }
 
@@ -295,7 +348,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 };
                 cargarTxtFrmAbm(nuevoCliente);
             }
-
+            mostrarBtnEliminar();
+            ocultarBtnModificar();
+            ocultarBtnAceptar();
+            tituloAccion.innerText = "Eliminar Usuario";
             switchForms();
         }
     });
@@ -329,8 +385,6 @@ function cargarTxtFrmAbm(usuario) {
         desabilitarCamposNoEmpleado();
         habilitarCamposEmpleado();
     }
-
-    btnAceptar.hidden = true;
 }
 
 async function modificarUsuario(id,usuario) {
