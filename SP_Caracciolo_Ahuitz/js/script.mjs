@@ -1,7 +1,7 @@
 import persona from "./persona.js";
 import futbolista from "./futbolista.js";
 import profesional from "./profesional.js";
-import { getUsersApi, agregarUsuariosApi,modificarUsuarioApi, eliminarUsuarioApi} from './ajax.mjs';
+import { getUsersApi, agregarUsuariosApi, modificarUsuarioApi, eliminarUsuarioApi } from './ajax.mjs';
 
 const tablaDatos = document.getElementById('tabla-datos');
 const frmLista = document.getElementById('frm-lista');
@@ -37,7 +37,7 @@ const spinner = document.getElementsByClassName('overlay');
 const tituloAccion = document.getElementById('accion-frm');
 
 
-let listaUsuarios;        
+let listaUsuarios;
 getUsersApi((error, data) => {
     showSpinner();
     if (error) {
@@ -75,7 +75,7 @@ function crearFila(dato) {
         <td><button class="btn-modificar" ">Modificar</button></td>
         <td><button class="btn-eliminar" ">Eliminar</button></td>
     `;
-    
+
     tablaDatos.querySelector('tbody').appendChild(fila);
 }
 
@@ -129,53 +129,53 @@ btnAceptar.addEventListener("click", () => {
     let tipo = dropDownTipo.value;
     showSpinner();
     agregarUsuariosApi(userData)
-    .then(newUserId => {
-        if (tipo == "Futbolista") {
-            if (txtNombre.value === "" || txtApellido.value === "" || txtEdad.value === "" || txtEquipo.value === "" || txtPosicion.value === "" || txtCantidadGoles.value === "") {
-                alert("Falto completar alguno de los campos");  
-                hideSpinner();
-                switchForms();        
-            } else {
-                const newUser = {
-                    id: newUserId,
-                    nombre: txtNombre.value,
-                    apellido: txtApellido.value,
-                    edad: txtEdad.value,
-                    equipo: txtEquipo.value,
-                    posicion: txtPosicion.value,
-                    cantidadGoles: txtCantidadGoles.value
-                };
-                listaUsuarios.push(newUser);
-                llenarTabla(listaUsuarios);
-                alert("Se añadio el usuario Correctamente");
-                hideSpinner();
-                switchForms();
+        .then(newUserId => {
+            if (tipo == "Futbolista") {
+                if (txtNombre.value === "" || txtApellido.value === "" || txtEdad.value === "" || txtEquipo.value === "" || txtPosicion.value === "" || txtCantidadGoles.value === "") {
+                    alert("Falto completar alguno de los campos");
+                    hideSpinner();
+                    switchForms();
+                } else {
+                    const newUser = {
+                        id: newUserId,
+                        nombre: txtNombre.value,
+                        apellido: txtApellido.value,
+                        edad: txtEdad.value,
+                        equipo: txtEquipo.value,
+                        posicion: txtPosicion.value,
+                        cantidadGoles: txtCantidadGoles.value
+                    };
+                    listaUsuarios.push(newUser);
+                    llenarTabla(listaUsuarios);
+                    alert("Se añadio el usuario Correctamente");
+                    hideSpinner();
+                    switchForms();
+                }
             }
-        }
-        
-        if (tipo == "Profesional") {
-            if (txtNombre.value === "" || txtApellido.value === "" || txtEdad.value === "" || txtTitulo.value === "" || txtFacultad.value === "" || txtAnioGraduacion.value === "") {
-                alert("Falto completar alguno de los campos");       
-                hideSpinner(); 
-                switchForms();  
-            } else {
-                const newUser = {
-                    id: newUserId,
-                    nombre: txtNombre.value,
-                    apellido: txtApellido.value,
-                    edad: txtEdad.value,
-                    titulo: txtTitulo.value,
-                    facultad: txtFacultad.value,
-                    añoGraduacion: txtAnioGraduacion.value
-                };
-                listaUsuarios.push(newUser);
-                llenarTabla(listaUsuarios);
-                alert("Se añadio el usuario Correctamente");
-                hideSpinner();
-                switchForms();
+
+            if (tipo == "Profesional") {
+                if (txtNombre.value === "" || txtApellido.value === "" || txtEdad.value === "" || txtTitulo.value === "" || txtFacultad.value === "" || txtAnioGraduacion.value === "") {
+                    alert("Falto completar alguno de los campos");
+                    hideSpinner();
+                    switchForms();
+                } else {
+                    const newUser = {
+                        id: newUserId,
+                        nombre: txtNombre.value,
+                        apellido: txtApellido.value,
+                        edad: txtEdad.value,
+                        titulo: txtTitulo.value,
+                        facultad: txtFacultad.value,
+                        añoGraduacion: txtAnioGraduacion.value
+                    };
+                    listaUsuarios.push(newUser);
+                    llenarTabla(listaUsuarios);
+                    alert("Se añadio el usuario Correctamente");
+                    hideSpinner();
+                    switchForms();
+                }
             }
-        }
-    });
+        });
 });
 
 function limpiarFormAbm() {
@@ -300,7 +300,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let edad = clickedRow.querySelector('td:nth-child(4)').innerText;
             let equipo = clickedRow.querySelector('td:nth-child(5)').innerText;
             let posicion = clickedRow.querySelector('td:nth-child(6)').innerText;
-            let cantidadGoles  = clickedRow.querySelector('td:nth-child(7)').innerText;
+            let cantidadGoles = clickedRow.querySelector('td:nth-child(7)').innerText;
             let titulo = clickedRow.querySelector('td:nth-child(8)').innerText;
             let facultad = clickedRow.querySelector('td:nth-child(9)').innerText;
             let anioGraduacion = clickedRow.querySelector('td:nth-child(10)').innerText;
@@ -347,7 +347,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let edad = clickedRow.querySelector('td:nth-child(4)').innerText;
             let equipo = clickedRow.querySelector('td:nth-child(5)').innerText;
             let posicion = clickedRow.querySelector('td:nth-child(6)').innerText;
-            let cantidadGoles  = clickedRow.querySelector('td:nth-child(7)').innerText;
+            let cantidadGoles = clickedRow.querySelector('td:nth-child(7)').innerText;
             let titulo = clickedRow.querySelector('td:nth-child(8)').innerText;
             let facultad = clickedRow.querySelector('td:nth-child(9)').innerText;
             let anioGraduacion = clickedRow.querySelector('td:nth-child(10)').innerText;
@@ -365,7 +365,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 cargarTxtFrmAbm(nuevoFutbolista);
             }
 
-            
+
 
             if (titulo != "N/A" && facultad != "N/A" && anioGraduacion != "N/A") {
                 const nuevoProfesional = {
@@ -379,7 +379,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 };
                 cargarTxtFrmAbm(nuevoProfesional);
             }
-            
+
 
 
             mostrarBtnEliminar();
@@ -407,7 +407,7 @@ function cargarTxtFrmAbm(usuario) {
         habilitarCamposFutbolista();
     }
 
-    if(tieneTituloOrFacultadOrAnioGraduacion(usuario) === true){
+    if (tieneTituloOrFacultadOrAnioGraduacion(usuario) === true) {
         limpiarFormAbm();
         dropDownTipo.value = "Profesional";
         dropDownTipo.disabled = true;
@@ -423,11 +423,12 @@ function cargarTxtFrmAbm(usuario) {
     }
 }
 
-async function modificarUsuario(id,usuario) {
+async function modificarUsuario(id, usuario) {
     showSpinner();
     try {
         await modificarUsuarioApi(id, usuario);
-        listaUsuarios.splice(id,1,usuario);
+        modificarUsuarioPorId(id,usuario);
+        //listaUsuarios.splice(id, 1, usuario);
         llenarTabla(listaUsuarios);
         alert("El Usuario fue Modificado Correctamente");
         hideSpinner();
@@ -439,8 +440,15 @@ async function modificarUsuario(id,usuario) {
     }
 }
 
-btnModificar.addEventListener("click", () => {
+function modificarUsuarioPorId(id, nuevoUsuario) 
+{ 
+    const index = listaUsuarios.findIndex(usuario => usuario.id == id); 
+    if (index !== -1) { 
+        listaUsuarios[index] = nuevoUsuario; 
+    } 
+}
 
+btnModificar.addEventListener("click", () => {
     let usuarioModificado = {
         id: txtId.value,
         nombre: txtNombre.value,
@@ -457,21 +465,21 @@ btnModificar.addEventListener("click", () => {
     modificarUsuario(txtId.value, usuarioModificado);
 });
 
-function eliminarUsuario(id){
+function eliminarUsuario(id) {
     showSpinner();
     eliminarUsuarioApi(id)
-    .then(() => {
-        eliminarUsuarioPorId(id);
-        alert("El Usuario ha sido Eliminado");
-        llenarTabla(listaUsuarios);
-        hideSpinner();
-        switchForms();
-    })
-    .catch(error => {
-        alert("Error Eliminando el Usuario", error.message);
-        hideSpinner();
-        switchForms();
-    })
+        .then(() => {
+            eliminarUsuarioPorId(id);
+            alert("El Usuario ha sido Eliminado");
+            llenarTabla(listaUsuarios);
+            hideSpinner();
+            switchForms();
+        })
+        .catch(error => {
+            alert("Error Eliminando el Usuario", error.message);
+            hideSpinner();
+            switchForms();
+        })
 }
 
 
@@ -500,4 +508,4 @@ function hideSpinner() {
 }
 
 
-export {showSpinner, hideSpinner};
+export { showSpinner, hideSpinner };
