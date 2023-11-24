@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Primer Parcial Labo</title>
+</head>
+<body>
+    
+    <div style = "display:block" id="form-datos">
+        <h1>Form Datos</h1>
+        <label>Filtrar por:</label>
+        <select id="filtro">
+            <option value="Todos">Todos</option>
+            <option value="Futbolistas">Futbolistas</option>
+            <option value="Profesionales">Profesionales</option>
+        </select>
+        <br>
+        <label for="calcular-promedio-velMax">Calcular Velocidad Maxima Promedio</label>
+        <input type="text" id = "promedio-input" disabled>
+        <button id="btn-calcular-promedio">Calcular</button>
+        <br>
+        <h3>Mostrar Columnas:</h3>
+        <br>
+        <div class="mostrar-columnas">
+            <label for="col-id">Id</label>
+            <input type="checkbox" id="col-id" checked />
+            <label for="col-nombre">Nombre</label>
+            <input type="checkbox" id="col-nombre" checked />
+            <label for="col-apellido">Apellido</label>
+            <input type="checkbox" id="col-apellido" checked />
+            <label for="col-edad">Edad</label>
+            <input type="checkbox" id="col-edad" checked />
+            <label for="col-equipo">Equipo</label>
+            <input type="checkbox" id="col-equipo" checked />
+            <label for="col-posicion">Posicion</label>
+            <input type="checkbox" id="col-posicion" checked />
+            <label for="col-cantGoles">CantGoles</label>
+            <input type="checkbox" id="col-cantGoles" checked />
+            <label for="col-titulo">Titulo</label>
+            <input type="checkbox" id="col-titulo" checked />
+            <label for="col-facultad">Facultad</label>
+            <input type="checkbox" id="col-facultad" checked />
+            <label for="col-añoGrad">Año Grad</label>
+            <input type="checkbox" id="col-añoGrad" checked />             
+        </div>
+        <br>
+        <h3>Mi Tabla de Datos</h3>
+        <table id="tabla-datos">
+            <thead>
+              <tr class="header-row">
+                <th id="id-header">Id</th>
+                <th id="nombre-header">Nombre</th>
+                <th id="apellido-header">Apellido</th>
+                <th id="edad-header">Edad</th>
+                <th id="equipo-header">Equipo</th>
+                <th id="posicion-header">Posicion</th>
+                <th id="cantGoles-header">CantGoles</th>
+                <th id="titulo-header">Titulo</th>
+                <th id="facultad-header">Facultad</th>
+                <th id="añoGrad-header">AñoGrad</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-datos"></tbody>
+        </table>
+        <br>
+        <button id="boton-agregar">Agregar</button>
+    </div>
+
+    <br><br>
+    <div style="display: none;" id="form-abm" >
+        <h2>Formulario ABM</h2>
+        <label for="id">Id:</label>
+        <input type="text" id="id" disabled="true" /><br>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" /><br>
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" /><br>
+        <label for="edad">Edad:</label>
+        <input type="text" id="edad" /><br>
+        <label for="tipo">Tipo</label>
+        <select id="tipo">
+          <option>Futbolista</option>
+          <option>Profesional</option>
+        </select>
+        <br>
+        <label for="equipo">Equipo:</label>
+        <input type="text" id="equipo" /><br>
+        <label for="posicion">Posicion:</label>
+        <input type="text" id="posicion" /><br>
+        <label for="cantGoles">Cantidad de Goles:</label>
+        <input type="text" id="cantGoles" /><br>
+        <label for="titulo">Titulo:</label>
+        <input type="text" id="titulo" /><br>
+        <label for="facultad">Facultad:</label>
+        <input type="text" id="facultad" /><br>
+        <label for="añoGrad">Año Graduacion:</label>
+        <input type="text" id="añoGrad" /><br>
+        <button id="cancelar">Cancelar</button>
+        <button id="modificar">Modificar</button>
+        <button id="eliminar">Eliminar</button>
+        <button id="insertar">Insertar</button>
+      </div>
+    <script type="module" src="js/script.js"></script>
+</body>
+</html>
