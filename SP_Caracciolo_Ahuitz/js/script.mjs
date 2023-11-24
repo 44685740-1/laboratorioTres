@@ -427,7 +427,7 @@ async function modificarUsuario(id, usuario) {
     showSpinner();
     try {
         await modificarUsuarioApi(id, usuario);
-        modificarUsuarioPorId(id,usuario);
+        modificarUsuarioPorId(id, usuario);
         //listaUsuarios.splice(id, 1, usuario);
         llenarTabla(listaUsuarios);
         alert("El Usuario fue Modificado Correctamente");
@@ -440,12 +440,11 @@ async function modificarUsuario(id, usuario) {
     }
 }
 
-function modificarUsuarioPorId(id, nuevoUsuario) 
-{ 
-    const index = listaUsuarios.findIndex(usuario => usuario.id == id); 
-    if (index !== -1) { 
-        listaUsuarios[index] = nuevoUsuario; 
-    } 
+function modificarUsuarioPorId(id, nuevoUsuario) {
+    const index = listaUsuarios.findIndex(usuario => usuario.id == id);
+    if (index !== -1) {
+        listaUsuarios[index] = nuevoUsuario;
+    }
 }
 
 btnModificar.addEventListener("click", () => {
